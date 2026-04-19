@@ -1,0 +1,154 @@
+{
+  "name": "Error Logger",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d365b866-ee8e-4425-90d9-1be1746c1111",
+      "name": "When Error Occurs",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        128,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "4WsQPWcwPQlltrvl",
+          "mode": "list",
+          "cachedResultName": "error log",
+          "cachedResultUrl": "/projects/L6kB6l5Ocr1dHJSt/datatables/4WsQPWcwPQlltrvl"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Workflow_ID": "={{ $json.execution.id }}",
+            "Workflow_Name": "={{ $json.workflow.name }}",
+            "ErrorMessage": "={{ $json.execution.error.message }}",
+            "ErrorNode": "={{ $json.execution.lastNodeExecuted }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Workflow_ID",
+              "displayName": "Workflow_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Workflow_Name",
+              "displayName": "Workflow_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ErrorMessage",
+              "displayName": "ErrorMessage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ErrorNode",
+              "displayName": "ErrorNode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "5943dcae-695b-4e0f-a239-b9e54770d8cb",
+      "name": "Log Error to Data Table",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C03HFT9S13N",
+          "mode": "list",
+          "cachedResultName": "general"
+        },
+        "text": "=🚨 *Error Alert*\n\n*Error:* {{ $json.execution.error.message }}\n*Time:* {{ $now }}\n",
+        "otherOptions": {}
+      },
+      "id": "b1cd78c9-5dc1-4b66-ae72-720376167d89",
+      "name": "Send Slack Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        480,
+        512
+      ],
+      "webhookId": "c768f9cf-90fb-4990-8561-7b92426756e7",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "KaQZuyLdoSljzFgW",
+          "name": "Slack OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Error Occurs": {
+      "main": [
+        [
+          {
+            "node": "Log Error to Data Table",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Slack Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Error to Data Table": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "979c9ec2-31f9-4094-b854-7b241e2dbf08",
+  "meta": {
+    "instanceId": "a3fc10bbcca3556541368f8d569321ae3400cc788cc146a4d6c35a7ddfbbf188"
+  },
+  "id": "E8DkCziQU2TO1bc4",
+  "tags": []
+}
