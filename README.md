@@ -27,10 +27,10 @@ Automatically screens candidate resumes against a job description using GPT-4o-m
 
 ### Workflow Design
 
-```
+
 <img width="809" height="379" alt="image" src="https://github.com/user-attachments/assets/acf791c4-a022-4f05-a4f9-65eeae03d4b2" />
 
-```
+
 
 ### Nodes
 
@@ -78,10 +78,10 @@ Acts as a global error handler for the Resume Screening workflow (and any other 
 
 ### Pipeline Flow
 
-```
+
 <img width="809" height="402" alt="image" src="https://github.com/user-attachments/assets/886e9f3b-6a72-4969-b808-1e1bb7dea7d7" />
 
-```
+
 
 ### Nodes
 
