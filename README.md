@@ -1,4 +1,4 @@
-# AI-Powered-Resume-Screening
+# AI Powered Resume Screening
 The purpose of this automation is to to streamline hiring processes with intelligent candidate evaluation and robust error monitoring.
 
 ---
